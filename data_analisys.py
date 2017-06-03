@@ -1,7 +1,7 @@
 import numpy as np
 import json
 
-DATA_PATH='/home/christian/Downloads/steam_users_json.txt'
+DATA_PATH='files/steam_users_json.txt'
 CS_ID='730'
 
 def main():
