@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import operator
 
 DATA_PATH='files/steam_users_json.txt'
 CS_ID='730'
@@ -11,10 +12,19 @@ def main():
     CSGO_friend_count = []
     CSGO_game_count = []
 
+    games_stats = {}
+    games_names = {}
+
     for line in f:
         u = json.loads(line)
         friend_count.append(u['friend_count'])
         game_count.append(u['game_count'])
+
+        for g in u['games']:
+            if(g in games_stats): games_stats[g] += 1
+            else:
+                games_stats[g] = 1
+                games_names[g] = u['games'][g]['name']
 
         if(CS_ID in u['games']):
             CSGO_friend_count.append(u['friend_count'])
@@ -32,6 +42,13 @@ def main():
     print('Games count std dev: ' + str(np.std(game_count)))
     print('Max game count: ' + str(max(game_count)))
     print('Min game count: ' + str(min(game_count)))
+
+    sorted_x = sorted(games_stats.items(), key=operator.itemgetter(1))
+    sorted_x.reverse()
+    print('Popular games:')
+    for x in sorted_x[:20]:
+        print('\t' + games_names[x[0]] + ' ('+ str(x[1]) + ')')
+
 
     print('*** CG:GO Stats ***')
     print(str(len(CSGO_friend_count)) + ' users')
