@@ -4,12 +4,16 @@ import sys
 
 DATA_PATH='files/steam_users_json.txt'
 CS_ID='730'
+PE_ID='238960'
 
 def convert_all():
 	convert(filename='steam_all.gml')
 
 def convert_csgo():
 	convert(game_id=CS_ID,filename='steam_csgo.gml')
+
+def convert_path_exile():
+	convert(game_id=PE_ID,filename='steam_pe.gml')
 
 def convert_limited(n):
 	convert(filename='limited.gml',limit=10000)
@@ -69,6 +73,8 @@ def main():
 		convert_csgo()
 	if('lim' in sys.argv):
 		convert_limited(10000)
+	if('pe' in sys.argv):
+		convert_path_exile()
 
 if __name__ == '__main__':
 	main()

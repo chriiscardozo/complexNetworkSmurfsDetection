@@ -3,6 +3,7 @@ from sybil_rank import sybilrank
 import numpy as np
 import random
 import operator
+from graph_tool import topology as gt
 
 def graph_to_dict(g):
 	print("Converting network to dict...")
@@ -20,11 +21,18 @@ def graph_to_dict(g):
 
 	return network
 
+def get_largest_cc(g):
+	l = gt.label_largest_component(g)
+	u = gt.GraphView(g, vfilt=l)
+	return u
+
 def main():
 	print('Loading graph...')
 	g = load_graph('files/steam_csgo.gml')
 	length = len(list(g.vertices()))
 	print(length, 'vertices')
+
+	g = get_largest_cc(g)
 	
 	network = graph_to_dict(g)
 
