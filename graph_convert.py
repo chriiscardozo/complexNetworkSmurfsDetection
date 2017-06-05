@@ -1,5 +1,6 @@
 import json
 from graph_tool.all import *
+from graph_tool import topology as gt
 import sys
 
 DATA_PATH='files/steam_users_json.txt'
@@ -13,14 +14,15 @@ def convert_csgo():
 	convert(game_id=CS_ID,filename='steam_csgo.gml')
 
 def convert_path_exile():
-	convert(game_id=PE_ID,filename='steam_pe.gml')
+	convert(game_id=PE_ID,filename='steam_poe.xml.gz')
 
 def convert_limited(n):
-	convert(filename='limited.gml',limit=10000)
+	convert(filename='limited.gml',limit=n)
 
 def convert(game_id=None,filename='steam.gml',limit=None):
 	print("Converting Steam network...")
 	g = Graph(directed=False)
+
 
 	users = {}
 	mapping = {}
@@ -72,8 +74,8 @@ def main():
 	if('cs' in sys.argv):
 		convert_csgo()
 	if('lim' in sys.argv):
-		convert_limited(10000)
-	if('pe' in sys.argv):
+		convert_limited(1000)
+	if('poe' in sys.argv):
 		convert_path_exile()
 
 if __name__ == '__main__':

@@ -5,8 +5,9 @@ def propagate_trust(network, trust_scores):
 		new_trust = 0.0
 		neighboors = network[n]
 		for u in neighboors:
-			u_degree = len(network[u])
-			new_trust += trust_scores[u] / float(u_degree)
+			u_prop = network[u][n]
+			new_trust += trust_scores[u] * u_prop
+			# new_trust += trust_scores[u]/ float(len(network[u]))
 		updated_scores[n] = new_trust
 	return updated_scores
 
