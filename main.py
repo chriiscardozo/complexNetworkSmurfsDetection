@@ -69,10 +69,10 @@ def main():
 	result_file='files/poe_rank.txt'
 	run(graph_file,trust_file,result_file)
 
-	# graph_file='files/csgograph.gml'
-	# trust_file='files/csgo_confiaveis.txt'
-	# result_file='files/csgo_rank.txt'
-	# run(graph_file,trust_file,result_file)
+	graph_file='files/csgograph.gml'
+	trust_file='files/csgo_confiaveis.txt'
+	result_file='files/csgo_rank.txt'
+	run(graph_file,trust_file,result_file)
 
 if __name__ == '__main__':
 	main()

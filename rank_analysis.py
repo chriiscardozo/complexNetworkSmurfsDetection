@@ -22,7 +22,7 @@ def get_trust(filename):
 
 def percentage_split(seq, percentages):
 	print(sum(percentages))
-	assert sum(percentages) == 1.0
+	assert abs(sum(percentages) - 1.0) < 0.000001
 	prv = 0
 	size = len(seq)
 	cum_percentage = 0
@@ -32,6 +32,10 @@ def percentage_split(seq, percentages):
 		yield seq[prv:nxt]
 		prv = nxt
 
+def get_bins_analysis(bins1,bins2):
+	for index, b1 in enumerate(bins1):
+		b2 = bins2[index]
+		print('Bin ' + str(index+1) + ': ' + str((len(set(b1) & set(b2)))/len(merged)))
 # ************************************************************
 
 
@@ -69,10 +73,6 @@ dist = []
 # print(np.mean(dist))
 # print(np.std(dist))
 
-
-bins1 = list(percentage_split([x[0] for x in poe_rank],[1.0/2]*2))
-bins2 = list(percentage_split([x[0] for x in csgo_rank],[1.0/2]*2))
-
-for index, b1 in enumerate(bins1):
-	b2 = bins2[index]
-	print('Bin ' + str(index+1) + ': ' + str((len(set(b1) & set(b2)))/len(merged)))
+bins1 = list(percentage_split([x[0] for x in poe_rank],[0.4,0.3,0.2,0.1]))
+bins2 = list(percentage_split([x[0] for x in csgo_rank],[0.4,0.3,0.2,0.1]))
+get_bins_analysis(bins1,bins2)
